@@ -1,0 +1,32 @@
+{
+  "service_account_0122": {
+    "old_hour": 4.756296739748478,
+    "new_hour": 10.947529688191748,
+    "old_fingerprint": "iOS 17|84:D6:58:69:D6:60|OPC-UA",
+    "new_fingerprint": "Windows 10|DD:B2:A8:08:B1:72|OPC-UA"
+  },
+  "user_0088": {
+    "old_hour": 10.0,
+    "new_hour": 16.73660774794336,
+    "old_fingerprint": "Ubuntu 22.04|D1:30:52:9B:D4:2D|SSH",
+    "new_fingerprint": "Windows 11|E3:10:4C:37:F9:27|SSH"
+  },
+  "user_0090": {
+    "old_hour": 9.0,
+    "new_hour": 15.602540288327418,
+    "old_fingerprint": "macOS Sonoma|A5:E7:63:82:2E:5A|OPC-UA",
+    "new_fingerprint": "FreeRTOS 10|17:64:9F:B6:DF:D0|OPC-UA"
+  },
+  "user_0005": {
+    "old_hour": 9.0,
+    "new_hour": 14.21319949954623,
+    "old_fingerprint": "Debian 12|50:F4:85:49:F5:EC|CoAP",
+    "new_fingerprint": "Ubuntu 20.04|FE:9B:E8:6F:7C:D3|CoAP"
+  },
+  "user_0006": {
+    "old_hour": 10.0,
+    "new_hour": 16.096035578475128,
+    "old_fingerprint": "Debian 12|5B:25:31:D3:51:4F|TLS",
+    "new_fingerprint": "Android 14|36:C2:07:D3:ED:05|TLS"
+  }
+}

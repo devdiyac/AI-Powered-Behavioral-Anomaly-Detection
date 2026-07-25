@@ -1,0 +1,16 @@
+{
+  "cold_start": {
+    "n_events": 75,
+    "n_anomalies": 0,
+    "mean_risk_score": 63.759333333333316,
+    "pr_auc": 0.0,
+    "roc_auc": 0.0
+  },
+  "warm": {
+    "n_events": 10284,
+    "n_anomalies": 1216,
+    "mean_risk_score": 28.946421625826527,
+    "pr_auc": 0.44873331045836173,
+    "roc_auc": 0.773554171479233
+  }
+}

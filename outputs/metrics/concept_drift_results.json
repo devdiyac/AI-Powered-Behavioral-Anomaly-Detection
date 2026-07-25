@@ -1,0 +1,27 @@
+{
+  "service_account_0122": {
+    "first_half_avg_risk": 26.499200000000002,
+    "second_half_avg_risk": 31.735,
+    "drift_reduced": false
+  },
+  "user_0088": {
+    "first_half_avg_risk": 31.143888888888892,
+    "second_half_avg_risk": 29.222631578947368,
+    "drift_reduced": true
+  },
+  "user_0090": {
+    "first_half_avg_risk": 27.229629629629628,
+    "second_half_avg_risk": 37.04259259259259,
+    "drift_reduced": false
+  },
+  "user_0005": {
+    "first_half_avg_risk": 23.95608695652174,
+    "second_half_avg_risk": 30.798260869565212,
+    "drift_reduced": false
+  },
+  "user_0006": {
+    "first_half_avg_risk": 29.80869565217391,
+    "second_half_avg_risk": 39.01166666666666,
+    "drift_reduced": false
+  }
+}
