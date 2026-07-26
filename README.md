@@ -2,6 +2,7 @@
 
 > An end-to-end, domain-agnostic AI/ML pipeline that models "normal" access behavior for users, service accounts, and edge IoT devices, detects intrusions in near real-time, classifies attack categories, and provides explainable risk scores with a modern React SOC Analyst dashboard.
 
+DEMO-VIDEO LINK : https://drive.google.com/file/d/1psjvoXsXIXrA7p3uR9BUzAKWYxvBTtUS/view?usp=sharing
 ---
 
 ## 📸 Dashboard Overview
