@@ -1,6 +1,5 @@
 # 🛡️ CyberShield — AI-Powered Behavioral Anomaly Detection Engine
 
-> **Honeywell Hackathon Submission**  
 > An end-to-end, domain-agnostic AI/ML pipeline that models "normal" access behavior for users, service accounts, and edge IoT devices, detects intrusions in near real-time, classifies attack categories, and provides explainable risk scores with a modern React SOC Analyst dashboard.
 
 ---
