@@ -1,13 +1,8 @@
 # 🛡️ CyberShield — AI-Powered Behavioral Anomaly Detection Engine
 
-> **Honeywell Hackathon Submission**  
 > An end-to-end, domain-agnostic AI/ML pipeline that models "normal" access behavior for users, service accounts, and edge IoT devices, detects intrusions in near real-time, classifies attack categories, and provides explainable risk scores with a modern React SOC Analyst dashboard.
 
 ---
-
-## 📸 Dashboard Overview
-
-![CyberShield Executive Overview](outputs/metrics/pr_curve.png)
 
 CyberShield includes a **production-grade React SOC Analyst Dashboard** with glassmorphism design, real-time telemetry, filterable alert queues, entity drill-downs, and a **Light / Dark mode** toggle.
 
@@ -160,19 +155,6 @@ Every alert includes human-readable feature attribution strings tagged with its 
 │   └── public/data.json       # Pre-bundled telemetry data
 └── outputs/                   # Generated pipeline deliverables (CSVs, models, plots)
 ```
-
----
-
-## ✅ Deliverables Checklist (Honeywell Hackathon)
-
-- [x] **1. Synthetic Data Generator:** reproducible access log generator with injected attack taxonomy.
-- [x] **2. Baseline Profiling Model:** per-entity statistical profiles + population fallback.
-- [x] **3. Detection Model:** sequence-aware IsolationForest + Z-score ensemble risk scorer (0–100).
-- [x] **4. Anomaly Classification:** supervised multi-class attack category classifier.
-- [x] **5. Explainability Layer:** per-alert feature attribution with explicit inference source tagging.
-- [x] **6. Analyst Dashboard:** React & Streamlit SOC dashboards featuring ranked alert queue, entity drill-downs, and theme toggling.
-- [x] **7. Technical Report:** comprehensive markdown report covering architecture, metrics, and limitations (`outputs/report.md`).
-- [x] **8. Presentation Slide Deck:** 10-slide summary deck for competition submission (`outputs/presentation.md`).
 
 ---
 
