@@ -1,10 +1,46 @@
 # 🛡️ CyberShield — AI-Powered Behavioral Anomaly Detection Engine
 
+> **Honeywell Hackathon Submission**  
 > An end-to-end, domain-agnostic AI/ML pipeline that models "normal" access behavior for users, service accounts, and edge IoT devices, detects intrusions in near real-time, classifies attack categories, and provides explainable risk scores with a modern React SOC Analyst dashboard.
 
 ---
 
-CyberShield includes a **production-grade React SOC Analyst Dashboard** with glassmorphism design, real-time telemetry, filterable alert queues, entity drill-downs, and a **Light / Dark mode** toggle.
+## 📸 Dashboard Overview
+
+CyberShield includes a **production-grade React SOC Analyst Dashboard** with glassmorphism design, real-time telemetry, filterable alert queues, entity drill-downs, and a **Light / Dark mode** toggle switch at the top.
+
+---
+
+## 🛠️ Technology Stack & Frameworks
+
+### 🧠 Machine Learning & Core Pipeline
+| Component | Library / Framework | Purpose |
+|---|---|---|
+| **Language** | Python 3.11 | Primary language for pipeline execution & data engineering |
+| **Unsupervised Model** | `scikit-learn.ensemble.IsolationForest` | High-dimensional multivariate outlier detection without labels |
+| **Supervised Classifier** | `scikit-learn.ensemble.RandomForestClassifier` | Multi-class attack taxonomy classification (**0.90 Weighted F1**) |
+| **Data Vectorization** | `pandas` & `numpy` | Causal feature calculations, rolling session windows, and matrix math |
+| **Geo Engine** | Vectorized Haversine Formula | Exact spherical physical distance ($\text{km}$) & velocity ($\text{km/h}$) calculation |
+| **Sequence Model** | First-Order Markov Transition Matrix | Command string token transition surprisability log-likelihood scoring |
+| **Concept Drift** | Exponential Moving Average (EMA, $\alpha=0.05$) | Online incremental entity profile updates to decay false alerts over time |
+| **Explainability (XAI)** | SHAP / Z-Score Feature Attribution | Per-alert feature importances with inference source tagging (`[PERSONAL]`, `[SEQUENCE]`, `[POPULATION]`) |
+| **Model Persistence** | `joblib` & `pickle` | Model checkpoint serialization (`outputs/models/*.pkl`) |
+
+### 💻 Frontend UI & Data Visualization
+| Component | Library / Tool | Purpose |
+|---|---|---|
+| **Frontend Framework** | React 18 | Component-based state management, tab routing, & entity selection |
+| **Build Tool & Server** | Vite 8 | Fast ESM bundler & hot-module replacement dev server |
+| **Chart Visualization** | Recharts 2 | Declarative SVG/Canvas charts (`AreaChart`, `BarChart`, `LineChart`, `PieChart`) |
+| **UI Iconography** | Lucide React | Clean, scalable vector icons (`Shield`, `Cpu`, `Bell`, `Sun`, `Moon`, `Search`) |
+| **Styling & Themes** | Vanilla CSS3 & CSS Variables | Dark Obsidian & Light Slate glassmorphism design system with top theme toggle switch |
+| **Python Dashboard** | Streamlit 1.30 | Native Python dashboard fallback (`streamlit run dashboard.py`) |
+
+### 📊 Plotting & Evaluation Artifacts
+| Component | Tool | Purpose |
+|---|---|---|
+| **Plot Generation** | Matplotlib & Seaborn | Static evaluation plot rendering (`pr_curve.png`, `confusion_matrix.png`, `alert_budget.png`) |
+| **Telemetry Serialization** | JSON & CSV | Standalone data bundle preparation (`data.json`, `scored_events.csv`) for offline judges |
 
 ---
 
