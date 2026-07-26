@@ -1,8 +1,14 @@
 import React from 'react';
-import { Shield, ShieldAlert, Activity, Cpu, Bell } from 'lucide-react';
+import { Shield, Cpu, Bell, Sun, Moon } from 'lucide-react';
 
-export default function Header({ summary, activeTab, setActiveTab }) {
+export default function Header({ summary, activeTab, setActiveTab, theme, setTheme }) {
   const criticalCount = summary?.total_anomalies || 0;
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+  };
 
   return (
     <header style={{
@@ -41,8 +47,8 @@ export default function Header({ summary, activeTab, setActiveTab }) {
         </div>
       </div>
 
-      {/* Live System Indicators */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+      {/* Live System Indicators & Controls */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -79,6 +85,35 @@ export default function Header({ summary, activeTab, setActiveTab }) {
         >
           <Bell size={16} color={criticalCount > 0 ? 'var(--risk-critical)' : 'var(--text-secondary)'} />
           <span>{criticalCount} Detected Anomalies</span>
+        </button>
+
+        {/* Top Dark/Light Mode Toggle Switch */}
+        <button
+          onClick={toggleTheme}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            padding: '8px 14px',
+            borderRadius: '10px',
+            border: '1px solid var(--border-color)',
+            background: 'var(--bg-card)',
+            color: 'var(--text-primary)',
+            fontSize: '0.82rem',
+            fontWeight: '600',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease'
+          }}
+          onMouseEnter={e => {
+            e.currentTarget.style.borderColor = 'var(--border-highlight)';
+          }}
+          onMouseLeave={e => {
+            e.currentTarget.style.borderColor = 'var(--border-color)';
+          }}
+          title="Toggle Light/Dark Theme"
+        >
+          {theme === 'dark' ? <Sun size={16} color="#FBBF24" /> : <Moon size={16} color="#6366F1" />}
+          <span>{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
         </button>
       </div>
     </header>

@@ -1,19 +1,13 @@
 import React from 'react';
-import { LayoutDashboard, AlertTriangle, Search, Activity, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, AlertTriangle, Search, Activity } from 'lucide-react';
 
-export default function Sidebar({ activeTab, setActiveTab, theme, setTheme }) {
+export default function Sidebar({ activeTab, setActiveTab }) {
   const menuItems = [
     { id: 'overview', label: 'Executive Overview', icon: LayoutDashboard },
     { id: 'alerts', label: 'Ranked Alert Queue', icon: AlertTriangle },
     { id: 'investigator', label: 'Entity Investigator', icon: Search },
     { id: 'performance', label: 'Model Evaluation', icon: Activity },
   ];
-
-  const toggleTheme = () => {
-    const next = theme === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-    document.documentElement.setAttribute('data-theme', next);
-  };
 
   return (
     <aside style={{
@@ -67,38 +61,6 @@ export default function Sidebar({ activeTab, setActiveTab, theme, setTheme }) {
           </button>
         );
       })}
-
-      {/* Theme toggle button at bottom */}
-      <button
-        onClick={toggleTheme}
-        style={{
-          marginTop: 'auto',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '10px',
-          padding: '12px 16px',
-          borderRadius: '10px',
-          border: '1px solid var(--border-color)',
-          background: 'var(--bg-card)',
-          color: 'var(--text-secondary)',
-          fontSize: '0.85rem',
-          fontWeight: '600',
-          cursor: 'pointer',
-          transition: 'all 0.2s ease'
-        }}
-        onMouseEnter={e => {
-          e.currentTarget.style.borderColor = 'var(--border-highlight)';
-          e.currentTarget.style.color = 'var(--text-primary)';
-        }}
-        onMouseLeave={e => {
-          e.currentTarget.style.borderColor = 'var(--border-color)';
-          e.currentTarget.style.color = 'var(--text-secondary)';
-        }}
-      >
-        {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
-        {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
-      </button>
     </aside>
   );
 }

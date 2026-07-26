@@ -190,7 +190,7 @@ export default function AlertsTab({ events, onSelectEntity }) {
                           fontWeight: '800',
                           letterSpacing: '0.04em',
                           background: ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.2)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.2)',
-                          color: ev.primary_inference_source === 'personal' ? '#818CF8' : ev.primary_inference_source === 'population' ? '#FCA5A5' : '#FDE047',
+                          color: ev.primary_inference_source === 'personal' ? 'var(--link-color)' : ev.primary_inference_source === 'population' ? 'var(--danger-text)' : 'var(--warning-text)',
                           border: `1px solid ${ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.4)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.4)' : 'rgba(245,158,11,0.4)'}`
                         }}>
                           {ev.primary_inference_source?.toUpperCase()}

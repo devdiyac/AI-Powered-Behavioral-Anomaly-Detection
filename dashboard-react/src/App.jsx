@@ -76,10 +76,10 @@ export default function App() {
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-dark)', transition: 'background 0.3s ease' }}>
-      <Header summary={data.summary} activeTab={activeTab} setActiveTab={setActiveTab} />
+      <Header summary={data.summary} activeTab={activeTab} setActiveTab={setActiveTab} theme={theme} setTheme={setTheme} />
 
       <div style={{ display: 'flex', flex: 1 }}>
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} theme={theme} setTheme={setTheme} />
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
 
         <main style={{ flex: 1, padding: '28px', maxWidth: '1600px', margin: '0 auto', width: '100%' }}>
           {activeTab === 'overview' && (

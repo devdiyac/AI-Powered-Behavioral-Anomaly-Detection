@@ -175,8 +175,26 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
                       {ev.predicted_type.replace('_', ' ')}
                     </span>
                   </td>
-                  <td style={{ fontSize: '0.8rem', color: 'var(--text-primary)', maxWidth: '400px' }}>
-                    {ev.explanation?.replace(/Flagged due to: /g, '').replace(/\[PERSONAL\]|\[POPULATION\]|\[SEQUENCE\]/g, '').trim()}
+                  <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '460px', padding: '10px 16px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                      <span style={{ 
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        padding: '2px 8px',
+                        borderRadius: '4px',
+                        fontSize: '0.65rem',
+                        fontWeight: '800',
+                        letterSpacing: '0.04em',
+                        background: ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.2)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.2)',
+                        color: ev.primary_inference_source === 'personal' ? 'var(--link-color)' : ev.primary_inference_source === 'population' ? 'var(--danger-text)' : 'var(--warning-text)',
+                        border: `1px solid ${ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.4)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.4)' : 'rgba(245,158,11,0.4)'}`
+                      }}>
+                        {ev.primary_inference_source?.toUpperCase() || 'PERSONAL'}
+                      </span>
+                      <span style={{ color: 'var(--text-primary)', lineHeight: '1.4', fontSize: '0.82rem' }}>
+                        {ev.explanation?.replace(/Flagged due to: /g, '').replace(/\[PERSONAL\]|\[POPULATION\]|\[SEQUENCE\]/g, '').trim()}
+                      </span>
+                    </div>
                   </td>
                 </tr>
               ))}
