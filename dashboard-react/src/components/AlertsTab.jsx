@@ -65,14 +65,14 @@ export default function AlertsTab({ events, onSelectEntity }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-      
+
       {/* Control Bar */}
       <div className="glass-card" style={{ padding: '20px', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center', justifyContent: 'space-between' }}>
-        
+
         {/* Search Input */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flex: '1 1 250px' }}>
           <Search size={18} color="var(--text-muted)" />
-          <input 
+          <input
             type="text"
             placeholder="Search entity, resource, explanation..."
             value={searchTerm}
@@ -85,7 +85,7 @@ export default function AlertsTab({ events, onSelectEntity }) {
         {/* Min Risk Slider */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
           <span style={{ fontSize: '0.85rem', fontWeight: '600', color: 'var(--text-secondary)' }}>Min Risk:</span>
-          <input 
+          <input
             type="range"
             min="0"
             max="100"
@@ -94,38 +94,38 @@ export default function AlertsTab({ events, onSelectEntity }) {
             onChange={e => { setMinRisk(Number(e.target.value)); setCurrentPage(1); }}
             style={{ accentColor: '#6366F1', cursor: 'pointer' }}
           />
-          <span className="mono" style={{ fontSize: '0.9rem', fontWeight: '700', minWidth: '32px', color: '#818CF8' }}>{minRisk}</span>
+          <span className="mono" style={{ fontSize: '0.9rem', fontWeight: '700', minWidth: '32px', color: 'var(--link-color)' }}>{minRisk}</span>
         </div>
 
         {/* Anomaly Type Dropdown */}
-        <select 
+        <select
           value={selectedType}
           onChange={e => { setSelectedType(e.target.value); setCurrentPage(1); }}
           className="input-field"
           style={{ cursor: 'pointer' }}
         >
           {anomalyTypes.map(t => (
-            <option key={t} value={t} style={{ background: '#0F172A', color: '#FFF' }}>
+            <option key={t} value={t} style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>
               {t === 'all' ? 'All Anomaly Types' : t.replace('_', ' ').toUpperCase()}
             </option>
           ))}
         </select>
 
         {/* Entity Type Dropdown */}
-        <select 
+        <select
           value={selectedEntityType}
           onChange={e => { setSelectedEntityType(e.target.value); setCurrentPage(1); }}
           className="input-field"
           style={{ cursor: 'pointer' }}
         >
-          <option value="all" style={{ background: '#0F172A' }}>All Entity Types</option>
-          <option value="user" style={{ background: '#0F172A' }}>User</option>
-          <option value="service_account" style={{ background: '#0F172A' }}>Service Account</option>
-          <option value="edge_device" style={{ background: '#0F172A' }}>Edge Device</option>
+          <option value="all" style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>All Entity Types</option>
+          <option value="user" style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>User</option>
+          <option value="service_account" style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>Service Account</option>
+          <option value="edge_device" style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>Edge Device</option>
         </select>
 
         <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-          Showing <span style={{ color: '#FFF', fontWeight: '700' }}>{filteredEvents.length}</span> alerts
+          Showing <span style={{ color: 'var(--text-primary)', fontWeight: '700' }}>{filteredEvents.length}</span> alerts
         </div>
 
       </div>
@@ -152,14 +152,14 @@ export default function AlertsTab({ events, onSelectEntity }) {
               {paginatedEvents.map((ev, index) => {
                 const globalRank = (currentPage - 1) * pageSize + index + 1;
                 return (
-                  <tr 
+                  <tr
                     key={`${ev.entity_id}-${ev.timestamp}-${index}`}
                     onClick={() => onSelectEntity(ev.entity_id)}
                     style={{ cursor: 'pointer' }}
                   >
                     <td className="mono" style={{ color: 'var(--text-muted)', fontSize: '0.8rem' }}>#{globalRank}</td>
                     <td>{getRiskBadge(ev.risk_score)}</td>
-                    <td className="mono" style={{ fontWeight: '700', color: '#A5B4FC' }}>{ev.entity_id}</td>
+                    <td className="mono" style={{ fontWeight: '700', color: 'var(--entity-color)' }}>{ev.entity_id}</td>
                     <td>
                       <span className="badge badge-tag">{ev.entity_type}</span>
                     </td>
@@ -167,9 +167,9 @@ export default function AlertsTab({ events, onSelectEntity }) {
                       {ev.timestamp.replace('T', ' ')}
                     </td>
                     <td>
-                      <span style={{ 
-                        fontWeight: '700', 
-                        color: ev.predicted_type === 'normal' ? '#64748B' : '#FCA5A5',
+                      <span style={{
+                        fontWeight: '700',
+                        color: ev.predicted_type === 'normal' ? 'var(--normal-text)' : 'var(--danger-text)',
                         textTransform: 'uppercase',
                         fontSize: '0.75rem'
                       }}>
@@ -179,20 +179,26 @@ export default function AlertsTab({ events, onSelectEntity }) {
                     <td className="mono" style={{ fontSize: '0.85rem' }}>
                       {ev.confidence ? `${ev.confidence.toFixed(1)}%` : 'N/A'}
                     </td>
-                    <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '400px' }}>
-                      <span style={{ 
-                        display: 'inline-block',
-                        padding: '2px 6px',
-                        borderRadius: '4px',
-                        fontSize: '0.65rem',
-                        fontWeight: '800',
-                        marginRight: '6px',
-                        background: ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.2)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.2)',
-                        color: ev.primary_inference_source === 'personal' ? '#818CF8' : ev.primary_inference_source === 'population' ? '#FCA5A5' : '#FDE047'
-                      }}>
-                        [{ev.primary_inference_source?.toUpperCase()}]
-                      </span>
-                      {ev.explanation}
+                    <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', maxWidth: '460px', padding: '10px 16px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', flexWrap: 'wrap' }}>
+                        <span style={{
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          padding: '2px 8px',
+                          borderRadius: '4px',
+                          fontSize: '0.65rem',
+                          fontWeight: '800',
+                          letterSpacing: '0.04em',
+                          background: ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.2)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.2)' : 'rgba(245,158,11,0.2)',
+                          color: ev.primary_inference_source === 'personal' ? '#818CF8' : ev.primary_inference_source === 'population' ? '#FCA5A5' : '#FDE047',
+                          border: `1px solid ${ev.primary_inference_source === 'personal' ? 'rgba(99,102,241,0.4)' : ev.primary_inference_source === 'population' ? 'rgba(239,68,68,0.4)' : 'rgba(245,158,11,0.4)'}`
+                        }}>
+                          {ev.primary_inference_source?.toUpperCase()}
+                        </span>
+                        <span style={{ color: 'var(--text-primary)', lineHeight: '1.4', fontSize: '0.82rem' }}>
+                          {ev.explanation?.replace(/Flagged due to: /g, '').replace(/\[PERSONAL\]|\[POPULATION\]|\[SEQUENCE\]/g, '').trim()}
+                        </span>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -204,11 +210,11 @@ export default function AlertsTab({ events, onSelectEntity }) {
         {/* Pagination Bar */}
         <div style={{ padding: '16px 20px', borderTop: '1px solid var(--border-color)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)' }}>
-            Page <strong style={{ color: '#FFF' }}>{currentPage}</strong> of {totalPages}
+            Page <strong style={{ color: 'var(--text-primary)' }}>{currentPage}</strong> of {totalPages}
           </span>
 
           <div style={{ display: 'flex', gap: '8px' }}>
-            <button 
+            <button
               disabled={currentPage === 1}
               onClick={() => setCurrentPage(p => Math.max(p - 1, 1))}
               className="btn btn-secondary"
@@ -216,7 +222,7 @@ export default function AlertsTab({ events, onSelectEntity }) {
             >
               <ChevronLeft size={16} /> Prev
             </button>
-            <button 
+            <button
               disabled={currentPage === totalPages}
               onClick={() => setCurrentPage(p => Math.min(p + 1, totalPages))}
               className="btn btn-secondary"

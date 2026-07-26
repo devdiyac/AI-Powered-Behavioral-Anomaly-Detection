@@ -10,7 +10,7 @@ export default function Header({ summary, activeTab, setActiveTab }) {
       alignItems: 'center',
       justifyContent: 'space-between',
       padding: '16px 28px',
-      background: 'rgba(15, 23, 42, 0.85)',
+      background: 'var(--header-bg)',
       backdropFilter: 'blur(12px)',
       borderBottom: '1px solid var(--border-color)',
       position: 'sticky',
@@ -33,7 +33,7 @@ export default function Header({ summary, activeTab, setActiveTab }) {
         </div>
         <div>
           <h1 style={{ fontSize: '1.25rem', fontWeight: '800', letterSpacing: '-0.02em', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            CyberShield <span style={{ fontSize: '0.75rem', padding: '2px 8px', borderRadius: '6px', background: 'rgba(99,102,241,0.2)', color: '#818CF8', border: '1px solid rgba(99,102,241,0.3)' }}>v2.4 SOC ML</span>
+            CyberShield <span style={{ fontSize: '0.75rem', padding: '2px 8px', borderRadius: '6px', background: 'rgba(99,102,241,0.2)', color: 'var(--link-color)', border: '1px solid rgba(99,102,241,0.3)' }}>v2.4 SOC ML</span>
           </h1>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', margin: 0 }}>
             AI-Powered Behavioral Anomaly Detection & Threat Intelligence
@@ -52,9 +52,9 @@ export default function Header({ summary, activeTab, setActiveTab }) {
           background: 'rgba(16, 185, 129, 0.1)',
           border: '1px solid rgba(16, 185, 129, 0.25)',
           fontSize: '0.8rem',
-          color: '#34D399'
+          color: 'var(--success-text)'
         }}>
-          <span className="animate-pulse-slow" style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981' }}></span>
+          <span className="animate-pulse-slow" style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--success-dot)' }}></span>
           <span style={{ fontWeight: '600' }}>ONLINE</span>
           <span style={{ opacity: 0.6 }}>|</span>
           <Cpu size={14} />
@@ -71,13 +71,13 @@ export default function Header({ summary, activeTab, setActiveTab }) {
             borderRadius: '10px',
             background: criticalCount > 0 ? 'rgba(239, 68, 68, 0.15)' : 'rgba(255,255,255,0.05)',
             border: criticalCount > 0 ? '1px solid rgba(239, 68, 68, 0.4)' : '1px solid var(--border-color)',
-            color: criticalCount > 0 ? '#FCA5A5' : 'var(--text-primary)',
+            color: criticalCount > 0 ? 'var(--danger-text)' : 'var(--text-primary)',
             cursor: 'pointer',
             fontWeight: '600',
             fontSize: '0.85rem'
           }}
         >
-          <Bell size={16} color={criticalCount > 0 ? '#EF4444' : 'var(--text-secondary)'} />
+          <Bell size={16} color={criticalCount > 0 ? 'var(--risk-critical)' : 'var(--text-secondary)'} />
           <span>{criticalCount} Detected Anomalies</span>
         </button>
       </div>

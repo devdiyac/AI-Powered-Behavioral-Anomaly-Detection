@@ -55,7 +55,7 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
         <div className="glass-card" style={{ padding: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-secondary)' }}>TOTAL ACCESS LOGS</span>
-            <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(99,102,241,0.1)', color: '#818CF8' }}>
+            <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(99,102,241,0.1)', color: 'var(--link-color)' }}>
               <Activity size={18} />
             </div>
           </div>
@@ -74,10 +74,10 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
               <ShieldAlert size={18} />
             </div>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '10px', color: '#EF4444' }} className="mono">
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '10px', color: 'var(--risk-critical)' }} className="mono">
             {summary.total_anomalies?.toLocaleString()}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#F87171', marginTop: '4px' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--danger-text)', marginTop: '4px' }}>
             Anomaly Rate: {(summary.anomaly_rate * 100).toFixed(2)}%
           </div>
         </div>
@@ -85,14 +85,14 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
         <div className="glass-card" style={{ padding: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-secondary)' }}>MODEL PR-AUC SCORE</span>
-            <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(6,182,212,0.1)', color: '#22D3EE' }}>
+            <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(6,182,212,0.1)', color: 'var(--accent-cyan)' }}>
               <Target size={18} />
             </div>
           </div>
           <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '10px' }} className="mono">
             {detection_metrics?.pr_auc ? detection_metrics.pr_auc.toFixed(3) : '0.381'}
           </div>
-          <div style={{ fontSize: '0.75rem', color: '#38BDF8', marginTop: '4px' }}>
+          <div style={{ fontSize: '0.75rem', color: 'var(--accent-cyan)', marginTop: '4px' }}>
             Imbalance-Resilient Evaluator
           </div>
         </div>
@@ -100,11 +100,11 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
         <div className="glass-card" style={{ padding: '20px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
             <span style={{ fontSize: '0.8rem', fontWeight: '600', color: 'var(--text-secondary)' }}>COLD-START ENTITIES</span>
-            <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(245,158,11,0.1)', color: '#FBBF24' }}>
+            <div style={{ padding: '8px', borderRadius: '8px', background: 'rgba(245,158,11,0.1)', color: 'var(--risk-medium)' }}>
               <UserX size={18} />
             </div>
           </div>
-          <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '10px', color: '#FBBF24' }} className="mono">
+          <div style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '10px', color: 'var(--risk-medium)' }} className="mono">
             15
           </div>
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)', marginTop: '4px' }}>
@@ -136,12 +136,12 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
                     <stop offset="95%" stopColor="#EF4444" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                <XAxis dataKey="date" stroke="#64748B" fontSize={11} />
-                <YAxis stroke="#64748B" fontSize={11} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                <XAxis dataKey="date" stroke="var(--text-muted)" fontSize={11} />
+                <YAxis stroke="var(--text-muted)" fontSize={11} />
                 <Tooltip 
-                  contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px', color: '#FFF' }}
-                  itemStyle={{ color: '#FCA5A5' }}
+                  contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }}
+                  itemStyle={{ color: 'var(--danger-text)' }}
                 />
                 <Area type="monotone" dataKey="count" name="Threat Events" stroke="#EF4444" strokeWidth={2} fillOpacity={1} fill="url(#colorRisk)" />
               </AreaChart>
@@ -170,7 +170,7 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
                     <Cell key={`cell-${index}`} fill={entry.color} stroke="none" />
                   ))}
                 </Pie>
-                <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -199,10 +199,10 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
           <div style={{ width: '100%', height: '240px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={risk_distribution}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                <XAxis dataKey="bin" stroke="#64748B" fontSize={10} />
-                <YAxis stroke="#64748B" fontSize={11} />
-                <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                <XAxis dataKey="bin" stroke="var(--text-muted)" fontSize={10} />
+                <YAxis stroke="var(--text-muted)" fontSize={11} />
+                <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
                 <Bar dataKey="count" name="Sessions" fill="#6366F1" radius={[4, 4, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -218,7 +218,7 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
             </div>
             <button 
               onClick={() => setActiveTab('alerts')}
-              style={{ background: 'none', border: 'none', color: '#818CF8', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
+              style={{ background: 'none', border: 'none', color: 'var(--link-color)', fontSize: '0.8rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '4px' }}
             >
               View Queue <ArrowUpRight size={14} />
             </button>
@@ -252,7 +252,7 @@ export default function OverviewTab({ data, onSelectEntity, setActiveTab }) {
                   </p>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '1.1rem', fontWeight: '800', color: ent.max_risk >= 75 ? '#EF4444' : '#F97316' }} className="mono">
+                  <div style={{ fontSize: '1.1rem', fontWeight: '800', color: ent.max_risk >= 75 ? 'var(--risk-critical)' : 'var(--risk-high)' }} className="mono">
                     {ent.max_risk.toFixed(1)}
                   </div>
                   <span style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Risk Score</span>

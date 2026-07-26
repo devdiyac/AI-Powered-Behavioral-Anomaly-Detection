@@ -1,24 +1,32 @@
 import React from 'react';
-import { LayoutDashboard, AlertTriangle, Search, Activity, FileText } from 'lucide-react';
+import { LayoutDashboard, AlertTriangle, Search, Activity, Sun, Moon } from 'lucide-react';
 
-export default function Sidebar({ activeTab, setActiveTab }) {
+export default function Sidebar({ activeTab, setActiveTab, theme, setTheme }) {
   const menuItems = [
     { id: 'overview', label: 'Executive Overview', icon: LayoutDashboard },
     { id: 'alerts', label: 'Ranked Alert Queue', icon: AlertTriangle },
     { id: 'investigator', label: 'Entity Investigator', icon: Search },
     { id: 'performance', label: 'Model Evaluation', icon: Activity },
-    { id: 'reports', label: 'Reports & Slides', icon: FileText },
   ];
+
+  const toggleTheme = () => {
+    const next = theme === 'dark' ? 'light' : 'dark';
+    setTheme(next);
+    document.documentElement.setAttribute('data-theme', next);
+  };
 
   return (
     <aside style={{
       width: '260px',
-      background: 'rgba(15, 23, 42, 0.6)',
+      background: 'var(--sidebar-bg)',
+      backdropFilter: 'blur(12px)',
+      WebkitBackdropFilter: 'blur(12px)',
       borderRight: '1px solid var(--border-color)',
       padding: '24px 16px',
       display: 'flex',
       flexDirection: 'column',
-      gap: '8px'
+      gap: '8px',
+      transition: 'background 0.3s ease'
     }}>
       <div style={{ padding: '0 12px 12px 12px', fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
         Navigation
@@ -48,22 +56,49 @@ export default function Sidebar({ activeTab, setActiveTab }) {
               textAlign: 'left'
             }}
             onMouseEnter={e => {
-              if (!isActive) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.04)';
+              if (!isActive) e.currentTarget.style.background = 'var(--table-row-hover)';
             }}
             onMouseLeave={e => {
               if (!isActive) e.currentTarget.style.background = 'transparent';
             }}
           >
-            <Icon size={18} color={isActive ? '#818CF8' : 'var(--text-muted)'} />
+            <Icon size={18} color={isActive ? 'var(--link-color)' : 'var(--text-muted)'} />
             <span>{item.label}</span>
           </button>
         );
       })}
 
-      <div style={{ marginTop: 'auto', padding: '16px', borderRadius: '12px', background: 'rgba(99,102,241,0.06)', border: '1px solid rgba(99,102,241,0.15)' }}>
-        <p style={{ fontSize: '0.75rem', fontWeight: '700', color: '#818CF8', marginBottom: '4px' }}>Honeywell Hackathon</p>
-        <p style={{ fontSize: '0.7rem', color: 'var(--text-secondary)' }}>Domain-Agnostic Behavioral Sequence Anomaly Detection Pipeline</p>
-      </div>
+      {/* Theme toggle button at bottom */}
+      <button
+        onClick={toggleTheme}
+        style={{
+          marginTop: 'auto',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '10px',
+          padding: '12px 16px',
+          borderRadius: '10px',
+          border: '1px solid var(--border-color)',
+          background: 'var(--bg-card)',
+          color: 'var(--text-secondary)',
+          fontSize: '0.85rem',
+          fontWeight: '600',
+          cursor: 'pointer',
+          transition: 'all 0.2s ease'
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.borderColor = 'var(--border-highlight)';
+          e.currentTarget.style.color = 'var(--text-primary)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.borderColor = 'var(--border-color)';
+          e.currentTarget.style.color = 'var(--text-secondary)';
+        }}
+      >
+        {theme === 'dark' ? <Sun size={16} /> : <Moon size={16} />}
+        {theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
+      </button>
     </aside>
   );
 }

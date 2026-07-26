@@ -152,22 +152,19 @@ def add_explanations(scored_df: pd.DataFrame, classifier, profiler) -> pd.DataFr
         for f in top_3:
             z_str = f"{abs(f['z_score']):.1f}σ"
             direction = "above" if f["z_score"] > 0 else "below"
-            baseline = "entity-type population baseline" if f["source"] == "population" else "personal baseline"
 
             if f["feature"] == "new_resource_flag" and f["value"] == 1:
-                parts.append(f"new resource accessed {_source_tag(f['source'])}")
+                parts.append("New resource accessed")
             elif f["feature"] == "new_device_flag" and f["value"] == 1:
-                parts.append(f"new device fingerprint {_source_tag(f['source'])}")
+                parts.append("New device fingerprint")
             elif f["feature"] == "is_off_hours" and f["value"] == 1:
-                parts.append(f"off-hours access {_source_tag(f['source'])}")
+                parts.append("Off-hours access")
             elif f["feature"] == "auth_failure_streak" and f["value"] > 0:
-                parts.append(f"{int(f['value'])} consecutive auth failures {_source_tag(f['source'])}")
+                parts.append(f"{int(f['value'])} consecutive auth failures")
             else:
-                parts.append(
-                    f"{f['description']} ({z_str} {direction} {baseline}) {_source_tag(f['source'])}"
-                )
+                parts.append(f"{f['description']} ({z_str} {direction} baseline)")
 
-        explanation = "Flagged due to: " + " + ".join(parts) if parts else "No significant anomaly signals"
+        explanation = " • ".join(parts) if parts else "Normal behavioral profile"
 
         # Determine primary inference source
         sources = [f["source"] for f in top_3]

@@ -42,16 +42,16 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
       {/* Entity Selector Bar */}
       <div className="glass-card" style={{ padding: '16px 24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '16px' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <Search size={20} color="#818CF8" />
+          <Search size={20} color="var(--link-color)" />
           <span style={{ fontWeight: '700', fontSize: '0.9rem' }}>Investigate Entity:</span>
           <select 
             value={activeEntity}
             onChange={e => setActiveEntity(e.target.value)}
             className="input-field mono"
-            style={{ fontWeight: '700', fontSize: '0.95rem', color: '#A5B4FC', padding: '8px 16px' }}
+            style={{ fontWeight: '700', fontSize: '0.95rem', color: 'var(--entity-color)', padding: '8px 16px' }}
           >
             {allEntityIds.map(eid => (
-              <option key={eid} value={eid} style={{ background: '#0F172A' }}>{eid}</option>
+              <option key={eid} value={eid} style={{ background: 'var(--bg-elevated)', color: 'var(--text-primary)' }}>{eid}</option>
             ))}
           </select>
         </div>
@@ -70,7 +70,7 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
       <div className="glass-card" style={{ padding: '24px', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '20px' }}>
         <div>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600' }}>ENTITY IDENTIFIER</span>
-          <h2 className="mono" style={{ fontSize: '1.4rem', fontWeight: '800', marginTop: '4px', color: '#A5B4FC' }}>{activeEntity}</h2>
+          <h2 className="mono" style={{ fontSize: '1.4rem', fontWeight: '800', marginTop: '4px', color: 'var(--entity-color)' }}>{activeEntity}</h2>
         </div>
 
         <div>
@@ -80,7 +80,7 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
 
         <div>
           <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', fontWeight: '600' }}>PEAK RISK SCORE</span>
-          <div className="mono" style={{ fontSize: '1.4rem', fontWeight: '800', marginTop: '4px', color: highestRiskEvent.risk_score >= 50 ? '#EF4444' : '#10B981' }}>
+          <div className="mono" style={{ fontSize: '1.4rem', fontWeight: '800', marginTop: '4px', color: highestRiskEvent.risk_score >= 50 ? 'var(--risk-critical)' : 'var(--risk-low)' }}>
             {highestRiskEvent.risk_score.toFixed(1)} / 100
           </div>
         </div>
@@ -104,10 +104,10 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
           <div style={{ width: '100%', height: '280px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={entityEvents}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                <XAxis dataKey="timestamp" stroke="#64748B" fontSize={10} tickFormatter={t => t.split('T')[0]} />
-                <YAxis domain={[0, 100]} stroke="#64748B" fontSize={11} />
-                <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                <XAxis dataKey="timestamp" stroke="var(--text-muted)" fontSize={10} tickFormatter={t => t.split('T')[0]} />
+                <YAxis domain={[0, 100]} stroke="var(--text-muted)" fontSize={11} />
+                <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
                 <Line type="monotone" dataKey="risk_score" name="Risk Score" stroke="#EF4444" strokeWidth={2.5} dot={{ r: 3, fill: '#EF4444' }} />
               </LineChart>
             </ResponsiveContainer>
@@ -123,10 +123,10 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
             <div style={{ width: '100%', height: '260px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={topFeatures} layout="vertical">
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis type="number" stroke="#64748B" fontSize={10} />
-                  <YAxis dataKey="description" type="category" stroke="#64748B" fontSize={10} width={130} />
-                  <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                  <XAxis type="number" stroke="var(--text-muted)" fontSize={10} />
+                  <YAxis dataKey="description" type="category" stroke="var(--text-muted)" fontSize={10} width={130} />
+                  <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
                   <Bar dataKey="importance_score" name="Importance" fill="#818CF8" radius={[0, 4, 4, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -159,23 +159,25 @@ export default function InvestigatorTab({ data, selectedEntityId, onSelectEntity
               {entityEvents.map((ev, idx) => (
                 <tr key={idx}>
                   <td className="mono" style={{ fontSize: '0.8rem' }}>{ev.timestamp.replace('T', ' ')}</td>
-                  <td className="mono" style={{ fontWeight: '700', color: ev.risk_score >= 50 ? '#EF4444' : '#10B981' }}>
+                  <td className="mono" style={{ fontWeight: '700', color: ev.risk_score >= 50 ? 'var(--risk-critical)' : 'var(--risk-low)' }}>
                     {ev.risk_score.toFixed(1)}
                   </td>
-                  <td className="mono" style={{ color: '#A5B4FC' }}>{ev.resource_accessed}</td>
+                  <td className="mono" style={{ color: 'var(--entity-color)' }}>{ev.resource_accessed}</td>
                   <td>{ev.auth_method}</td>
                   <td className="mono">{ev.session_duration?.toFixed(1)}</td>
                   <td>
                     <span style={{ 
                       fontWeight: '700', 
-                      color: ev.predicted_type === 'normal' ? '#64748B' : '#FCA5A5',
+                      color: ev.predicted_type === 'normal' ? 'var(--normal-text)' : 'var(--danger-text)',
                       fontSize: '0.75rem',
                       textTransform: 'uppercase'
                     }}>
                       {ev.predicted_type.replace('_', ' ')}
                     </span>
                   </td>
-                  <td style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{ev.explanation}</td>
+                  <td style={{ fontSize: '0.8rem', color: 'var(--text-primary)', maxWidth: '400px' }}>
+                    {ev.explanation?.replace(/Flagged due to: /g, '').replace(/\[PERSONAL\]|\[POPULATION\]|\[SEQUENCE\]/g, '').trim()}
+                  </td>
                 </tr>
               ))}
             </tbody>

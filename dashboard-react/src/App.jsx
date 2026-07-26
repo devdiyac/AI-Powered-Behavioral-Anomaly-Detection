@@ -5,7 +5,6 @@ import OverviewTab from './components/OverviewTab';
 import AlertsTab from './components/AlertsTab';
 import InvestigatorTab from './components/InvestigatorTab';
 import PerformanceTab from './components/PerformanceTab';
-import ReportTab from './components/ReportTab';
 
 export default function App() {
   const [data, setData] = useState(null);
@@ -13,6 +12,11 @@ export default function App() {
   const [error, setError] = useState(null);
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedEntityId, setSelectedEntityId] = useState(null);
+  const [theme, setTheme] = useState('dark');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   useEffect(() => {
     fetch('/data.json')
@@ -44,8 +48,8 @@ export default function App() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        background: '#090D16',
-        color: '#F9FAFB'
+        background: 'var(--bg-dark)',
+        color: 'var(--text-primary)'
       }}>
         <div style={{
           width: '50px',
@@ -71,11 +75,11 @@ export default function App() {
   }
 
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-dark)' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', background: 'var(--bg-dark)', transition: 'background 0.3s ease' }}>
       <Header summary={data.summary} activeTab={activeTab} setActiveTab={setActiveTab} />
 
       <div style={{ display: 'flex', flex: 1 }}>
-        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} />
+        <Sidebar activeTab={activeTab} setActiveTab={setActiveTab} theme={theme} setTheme={setTheme} />
 
         <main style={{ flex: 1, padding: '28px', maxWidth: '1600px', margin: '0 auto', width: '100%' }}>
           {activeTab === 'overview' && (
@@ -92,10 +96,6 @@ export default function App() {
 
           {activeTab === 'performance' && (
             <PerformanceTab data={data} />
-          )}
-
-          {activeTab === 'reports' && (
-            <ReportTab />
           )}
         </main>
       </div>

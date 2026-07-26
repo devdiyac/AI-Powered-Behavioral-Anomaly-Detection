@@ -33,7 +33,7 @@ export default function PerformanceTab({ data }) {
         
         <div className="glass-card" style={{ padding: '20px' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)' }}>DETECTION PR-AUC</span>
-          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: '#06B6D4' }}>
+          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: 'var(--accent-cyan)' }}>
             {detection_metrics?.pr_auc ? detection_metrics.pr_auc.toFixed(3) : '0.381'}
           </div>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px' }}>Class Imbalance-Resilient Metric</p>
@@ -41,7 +41,7 @@ export default function PerformanceTab({ data }) {
 
         <div className="glass-card" style={{ padding: '20px' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)' }}>ROC-AUC SCORE</span>
-          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: '#818CF8' }}>
+          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: 'var(--link-color)' }}>
             {detection_metrics?.roc_auc ? detection_metrics.roc_auc.toFixed(3) : '0.768'}
           </div>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px' }}>Joint Feature Separation</p>
@@ -49,7 +49,7 @@ export default function PerformanceTab({ data }) {
 
         <div className="glass-card" style={{ padding: '20px' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)' }}>CLASSIFIER WEIGHTED F1</span>
-          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: '#10B981' }}>
+          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: 'var(--risk-low)' }}>
             90.0%
           </div>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px' }}>7 Attack Categories Classified</p>
@@ -57,7 +57,7 @@ export default function PerformanceTab({ data }) {
 
         <div className="glass-card" style={{ padding: '20px' }}>
           <span style={{ fontSize: '0.75rem', fontWeight: '700', color: 'var(--text-muted)' }}>TOP 1% ALERT BUDGET RECALL</span>
-          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: '#F97316' }}>
+          <div className="mono" style={{ fontSize: '1.8rem', fontWeight: '800', marginTop: '6px', color: 'var(--risk-high)' }}>
             40.0%
           </div>
           <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', marginTop: '4px' }}>Realistic SOC Analyst Budget</p>
@@ -76,10 +76,10 @@ export default function PerformanceTab({ data }) {
           <div style={{ width: '100%', height: '260px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={alert_budget || []}>
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                <XAxis dataKey="alert_budget_pct" stroke="#64748B" fontSize={11} unit="%" />
-                <YAxis stroke="#64748B" fontSize={11} domain={[0, 1]} />
-                <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                <XAxis dataKey="alert_budget_pct" stroke="var(--text-muted)" fontSize={11} unit="%" />
+                <YAxis stroke="var(--text-muted)" fontSize={11} domain={[0, 1]} />
+                <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
                 <Legend />
                 <Line type="monotone" dataKey="precision" name="Precision" stroke="#EF4444" strokeWidth={2} dot={{ r: 3 }} />
                 <Line type="monotone" dataKey="recall" name="Recall" stroke="#06B6D4" strokeWidth={2} dot={{ r: 3 }} />
@@ -96,10 +96,10 @@ export default function PerformanceTab({ data }) {
           <div style={{ width: '100%', height: '260px' }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={classificationRows} layout="vertical">
-                <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                <XAxis type="number" domain={[0, 100]} stroke="#64748B" fontSize={11} unit="%" />
-                <YAxis dataKey="name" type="category" stroke="#64748B" fontSize={10} width={130} />
-                <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                <XAxis type="number" domain={[0, 100]} stroke="var(--text-muted)" fontSize={11} unit="%" />
+                <YAxis dataKey="name" type="category" stroke="var(--text-muted)" fontSize={10} width={130} />
+                <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
                 <Bar dataKey="f1" name="F1 Score (%)" fill="#10B981" radius={[0, 4, 4, 0]} />
               </BarChart>
             </ResponsiveContainer>
@@ -125,10 +125,10 @@ export default function PerformanceTab({ data }) {
             <div style={{ width: '100%', height: '220px' }}>
               <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={driftData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="timestamp" stroke="#64748B" fontSize={10} />
-                  <YAxis domain={[0, 100]} stroke="#64748B" fontSize={11} />
-                  <Tooltip contentStyle={{ background: '#0F172A', borderColor: '#334155', borderRadius: '8px' }} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="var(--border-color)" />
+                  <XAxis dataKey="timestamp" stroke="var(--text-muted)" fontSize={10} />
+                  <YAxis domain={[0, 100]} stroke="var(--text-muted)" fontSize={11} />
+                  <Tooltip contentStyle={{ background: 'var(--tooltip-bg)', borderColor: 'var(--border-color)', borderRadius: '8px', color: 'var(--text-primary)' }} />
                   <Line type="monotone" dataKey="risk_score" name="Risk Score" stroke="#FBBF24" strokeWidth={2} dot={{ r: 3 }} />
                 </LineChart>
               </ResponsiveContainer>
@@ -150,21 +150,21 @@ export default function PerformanceTab({ data }) {
 
           <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
             <div style={{ padding: '14px', borderRadius: '10px', background: 'rgba(99,102,241,0.08)', border: '1px solid rgba(99,102,241,0.2)' }}>
-              <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#A5B4FC' }}>Established Entities (Warm)</div>
+              <div style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--link-color)' }}>Established Entities (Warm)</div>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
                 Events Monitored: {cold_start_metrics?.warm?.n_events || 10284} · Personal Profile Active
               </p>
-              <div style={{ marginTop: '8px', fontSize: '0.85rem', fontWeight: '700', color: '#FFF' }}>
+              <div style={{ marginTop: '8px', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                 PR-AUC: {cold_start_metrics?.warm?.pr_auc?.toFixed(3) || '0.449'}
               </div>
             </div>
 
             <div style={{ padding: '14px', borderRadius: '10px', background: 'rgba(245,158,11,0.08)', border: '1px solid rgba(245,158,11,0.2)' }}>
-              <div style={{ fontWeight: '700', fontSize: '0.9rem', color: '#FDE047' }}>Cold-Start Entities (&lt; 5 sessions)</div>
+              <div style={{ fontWeight: '700', fontSize: '0.9rem', color: 'var(--warning-text)' }}>Cold-Start Entities (&lt; 5 sessions)</div>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginTop: '4px' }}>
                 Events Monitored: {cold_start_metrics?.cold_start?.n_events || 75} · Population Fallback Baseline
               </p>
-              <div style={{ marginTop: '8px', fontSize: '0.85rem', fontWeight: '700', color: '#FFF' }}>
+              <div style={{ marginTop: '8px', fontSize: '0.85rem', fontWeight: '700', color: 'var(--text-primary)' }}>
                 Population Baseline Safety Net Active
               </div>
             </div>
